@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@/types/auth';
+import { authApi } from '@/api/authApi';
+import { useQuery } from '@tanstack/react-query';
 
 interface AuthContextType {
   user: User | null;
@@ -9,55 +11,65 @@ interface AuthContextType {
   login: (token: string, user: User) => void;
   logout: () => void;
   updateUser: (user: User) => void;
+  refetchUser: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  
+  // Query para buscar dados do usuário
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    refetch: refetchUser,
+  } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: () => authApi.getCurrentUser(),
+    enabled: !!token, // Só executa se tiver token
+    retry: false,
+  });
 
   useEffect(() => {
-    // Verificar se há token e usuário no localStorage
+    // Verificar se há token no localStorage
     const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-
-    if (storedToken && storedUser) {
+    
+    if (storedToken) {
       setToken(storedToken);
-      setUser(JSON.parse(storedUser));
+    } else {
+      setToken(null);
     }
-
-    setIsLoading(false);
   }, []);
 
   const login = (newToken: string, newUser: User) => {
     setToken(newToken);
-    setUser(newUser);
     localStorage.setItem('token', newToken);
     localStorage.setItem('user', JSON.stringify(newUser));
+    // Forçar refetch dos dados do usuário
+    refetchUser();
   };
 
   const logout = () => {
     setToken(null);
-    setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   };
 
   const updateUser = (updatedUser: User) => {
-    setUser(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));
+    refetchUser();
   };
 
   const value = {
-    user,
+    user: user || null,
     token,
     isAuthenticated: !!token && !!user,
-    isLoading,
+    isLoading: isUserLoading,
     login,
     logout,
     updateUser,
+    refetchUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
