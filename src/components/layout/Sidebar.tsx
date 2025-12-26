@@ -16,7 +16,7 @@ import {
 import {
   Dashboard as DashboardIcon,
   Home as HomeIcon,
-//   People as PeopleIcon,
+  People as PeopleIcon,
 //   Description as DescriptionIcon,
   Person as PersonIcon,
   Settings as SettingsIcon,
@@ -62,22 +62,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       icon: <HomeIcon />,
       path: '/imoveis',
     },
-    // {
-    //   text: 'Imóveis',
-    //   icon: <HomeIcon />,
-    //   children: [
-    //     { text: 'Listar Imóveis', path: '/imoveis' },
-    //     { text: 'Cadastrar Imóvel', path: '/imoveis/novo' },
-    //   ],
-    // },
-    // {
-    //   text: 'Clientes',
-    //   icon: <PeopleIcon />,
-    //   children: [
-    //     { text: 'Listar Clientes', path: '/clientes' },
-    //     { text: 'Cadastrar Cliente', path: '/clientes/novo' },
-    //   ],
-    // },
+    {
+      text: 'Locatários',
+      icon: <PeopleIcon />,
+      path: '/locatarios',
+    },
     // {
     //   text: 'Contratos',
     //   icon: <DescriptionIcon />,

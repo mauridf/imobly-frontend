@@ -10,6 +10,9 @@ const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
 const ImoveisPage = lazy(() => import('@/pages/ImoveisPage'));
+const LocatariosPage = lazy(() => import('@/pages/LocatariosPage'));
+const LocatarioCreatePage = lazy(() => import('@/pages/LocatarioCreatePage'));
+const LocatarioEditPage = lazy(() => import('@/pages/LocatarioEditPage'));
 const ImovelFormPage = lazy(() => import('@/pages/ImovelFormPage'));
 
 function AppRoutes() {
@@ -29,6 +32,9 @@ function AppRoutes() {
           <Route path="/imoveis" element={<ImoveisPage />} />
           <Route path="/imoveis/novo" element={<ImovelFormPage />} />
           <Route path="/imoveis/editar/:id" element={<ImovelFormPage />} />
+          <Route path="/locatarios" element={<LocatariosPage />} />
+        <Route path="/locatarios/novo" element={<LocatarioCreatePage />} />
+        <Route path="/locatarios/editar/:id" element={<LocatarioEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
