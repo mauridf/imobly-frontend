@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
-//   Home as HomeIcon,
+  Home as HomeIcon,
 //   People as PeopleIcon,
 //   Description as DescriptionIcon,
   Person as PersonIcon,
@@ -56,6 +56,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       text: 'Meu Perfil', // Adicionar esta opção
       icon: <PersonIcon />,
       path: '/perfil',
+    },
+    {
+      text: 'Imóveis', // Adicionar esta opção
+      icon: <HomeIcon />,
+      path: '/imoveis',
     },
     // {
     //   text: 'Imóveis',

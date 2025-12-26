@@ -9,6 +9,8 @@ const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
+const ImoveisPage = lazy(() => import('@/pages/ImoveisPage'));
+const ImovelFormPage = lazy(() => import('@/pages/ImovelFormPage'));
 
 function AppRoutes() {
   return (
@@ -24,6 +26,9 @@ function AppRoutes() {
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/perfil" element={<ProfilePage />} />
+          <Route path="/imoveis" element={<ImoveisPage />} />
+          <Route path="/imoveis/novo" element={<ImovelFormPage />} />
+          <Route path="/imoveis/editar/:id" element={<ImovelFormPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
