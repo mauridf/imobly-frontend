@@ -7,7 +7,7 @@ import {
   ChangePasswordRequest,
   UpdateUserRequest,
   User,
-  ApiError,
+  // Remover ApiError - não está sendo usado
 } from '@/types/auth';
 
 export const authApi = {

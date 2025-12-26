@@ -48,7 +48,7 @@ function Header({ onDrawerToggle }: HeaderProps) {
   };
 
   const handleProfile = () => {
-    // Aqui podemos navegar para a página de perfil futuramente
+    navigate('/perfil'); // Navegar para a página de perfil
     handleMenuClose();
   };
 

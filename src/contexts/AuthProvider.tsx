@@ -1,23 +1,14 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useState } from 'react';
 import { User } from '@/types/auth';
 import { authApi } from '@/api/authApi';
 import { useQuery } from '@tanstack/react-query';
-
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (token: string, user: User) => void;
-  logout: () => void;
-  updateUser: (user: User) => void;
-  refetchUser: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext } from './AuthContext';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(() => {
+    // Estado inicial baseado no localStorage
+    return localStorage.getItem('token');
+  });
   
   // Query para buscar dados do usuário
   const {
@@ -30,17 +21,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     enabled: !!token, // Só executa se tiver token
     retry: false,
   });
-
-  useEffect(() => {
-    // Verificar se há token no localStorage
-    const storedToken = localStorage.getItem('token');
-    
-    if (storedToken) {
-      setToken(storedToken);
-    } else {
-      setToken(null);
-    }
-  }, []);
 
   const login = (newToken: string, newUser: User) => {
     setToken(newToken);
@@ -73,12 +53,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 }

@@ -18,6 +18,7 @@ import {
 //   Home as HomeIcon,
 //   People as PeopleIcon,
 //   Description as DescriptionIcon,
+  Person as PersonIcon,
   Settings as SettingsIcon,
   ExpandLess,
   ExpandMore,
@@ -50,6 +51,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       text: 'Dashboard',
       icon: <DashboardIcon />,
       path: '/dashboard',
+    },
+    {
+      text: 'Meu Perfil', // Adicionar esta opção
+      icon: <PersonIcon />,
+      path: '/perfil',
     },
     // {
     //   text: 'Imóveis',
