@@ -8,6 +8,7 @@ import AuthLayout from '@/components/auth/AuthLayout';
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
+const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
 
 function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ function AppRoutes() {
         {/* Rotas privadas */}
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/perfil" element={<ProfilePage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
