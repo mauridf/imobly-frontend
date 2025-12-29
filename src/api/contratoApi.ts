@@ -56,6 +56,23 @@ export const contratoApi = {
   async reativar(id: string): Promise<void> {
     await apiClient.put(`/Contratos/${id}/reativar`);
   },
+
+  // Gerar PDF (baixar)
+  async gerarPDF(id: string): Promise<Blob> {
+    const response = await apiClient.get(`/Contratos/${id}/gerar-pdf`, {
+      responseType: 'blob',
+      headers: {
+        'Accept': 'application/pdf',
+      },
+    });
+    return response.data;
+  },
+
+  // Salvar PDF no sistema
+  async salvarPDF(id: string): Promise<Contrato> {
+    const response = await apiClient.post<Contrato>(`/Contratos/${id}/salvar-pdf`);
+    return response.data;
+  },
 };
 
 // Queries do React Query para Contratos

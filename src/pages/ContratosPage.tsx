@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Snackbar
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -29,9 +30,12 @@ import {
   Visibility as VisibilityIcon,
   CheckCircle as AtivoIcon,
   Cancel as EncerradoIcon,
-  Pause as PauseIcon, // Corrigido o import
+  Pause as PauseIcon,
   Close as CloseIcon,
   PlayArrow as ReativarIcon,
+  PictureAsPdf as PdfIcon,
+  Save as SaveIcon,
+  CheckCircle as CheckCircleIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -47,6 +51,16 @@ function ContratosPage() {
   const [selectedContrato, setSelectedContrato] = useState<Contrato | null>(null);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [error, setError] = useState<string>('');
+  const [contratoIdEmProcessamento, setContratoIdEmProcessamento] = useState<string | null>(null);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: 'success' | 'error' | 'info' | 'warning';
+  }>({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
 
   // Query para buscar contratos
   const {
@@ -94,6 +108,68 @@ function ContratosPage() {
     },
     onError: (error) => {
       setError(extractErrorMessage(error));
+    },
+  });
+
+  const gerarPDFMutation = useMutation({
+    mutationFn: (id: string) => {
+      setContratoIdEmProcessamento(id);
+      return contratoApi.gerarPDF(id);
+    },
+    onSuccess: (blob: Blob, id: string) => {
+      // Baixar o PDF automaticamente
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `contrato-${id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      // Mostrar feedback
+      setError('');
+      setSnackbar({
+        open: true,
+        message: 'PDF gerado com sucesso!',
+        severity: 'success',
+      });
+    },
+    onError: (error) => {
+      setSnackbar({
+        open: true,
+        message: `Erro ao gerar PDF: ${extractErrorMessage(error)}`,
+        severity: 'error',
+      });
+    },
+    onSettled: () => {
+      setContratoIdEmProcessamento(null);
+    },
+  });
+
+  const salvarPDFMutation = useMutation({
+    mutationFn: (id: string) => {
+      setContratoIdEmProcessamento(id);
+      return contratoApi.salvarPDF(id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contratos'] });
+      setError('');
+      setSnackbar({
+        open: true,
+        message: 'PDF salvo com sucesso!',
+        severity: 'success',
+      });
+    },
+    onError: (error) => {
+      setSnackbar({
+        open: true,
+        message: `Erro ao salvar PDF: ${extractErrorMessage(error)}`,
+        severity: 'error',
+      });
+    },
+    onSettled: () => {
+      setContratoIdEmProcessamento(null);
     },
   });
 
@@ -147,6 +223,14 @@ function ContratosPage() {
 
   const handleReativar = (id: string) => {
     reativarMutation.mutate(id);
+  };
+
+  const handleGerarPDF = (id: string) => {
+    gerarPDFMutation.mutate(id);
+  };
+
+  const handleSalvarPDF = (id: string) => {
+    salvarPDFMutation.mutate(id);
   };
 
   const formatCurrency = (value: number) => {
@@ -316,6 +400,35 @@ function ContratosPage() {
                     >
                       <VisibilityIcon fontSize="small" />
                     </IconButton>
+
+                    <IconButton
+                      size="small"
+                      onClick={() => handleGerarPDF(contrato.id)}
+                      title="Baixar PDF"
+                      color="primary"
+                      disabled={gerarPDFMutation.isPending}
+                    >
+                      {gerarPDFMutation.isPending && contratoIdEmProcessamento === contrato.id ? (
+                        <CircularProgress size={16} />
+                      ) : (
+                        <PdfIcon fontSize="small" />
+                      )}
+                    </IconButton>
+
+                    <IconButton
+                      size="small"
+                      onClick={() => handleSalvarPDF(contrato.id)}
+                      title="Salvar PDF no sistema"
+                      color="secondary"
+                      disabled={salvarPDFMutation.isPending || !!contrato.caminhoDocumentoPDF}
+                    >
+                      {salvarPDFMutation.isPending && contratoIdEmProcessamento === contrato.id ? (
+                        <CircularProgress size={16} />
+                      ) : (
+                        <SaveIcon fontSize="small" />
+                      )}
+                    </IconButton>
+
                     <IconButton
                       size="small"
                       onClick={() => handleEdit(contrato.id)}
@@ -477,6 +590,25 @@ function ContratosPage() {
                 />
               </Box>
 
+              <Box mb={2} display="flex" gap={2} alignItems="center">
+                <Typography variant="subtitle2">
+                  Documento PDF:
+                </Typography>
+                {selectedContrato.caminhoDocumentoPDF ? (
+                  <Chip
+                    label="PDF Salvo"
+                    color="success"
+                    size="small"
+                    icon={<CheckCircleIcon />}
+                  />
+                ) : (
+                  <Chip
+                    label="PDF não salvo"
+                    color="default"
+                    size="small"
+                  />
+                )}
+              </Box>
               {selectedContrato.caminhoDocumentoPDF && (
                 <Box mb={2}>
                   <Typography variant="subtitle2" gutterBottom>
@@ -498,9 +630,46 @@ function ContratosPage() {
           )}
         </DialogContent>
         <DialogActions>
+          <Button
+            onClick={() => selectedContrato && handleGerarPDF(selectedContrato.id)}
+            disabled={!selectedContrato || gerarPDFMutation.isPending}
+            startIcon={<PdfIcon />}
+            variant="outlined"
+          >
+            {gerarPDFMutation.isPending ? 'Gerando...' : 'Baixar PDF'}
+          </Button>
+          
+          <Button
+            onClick={() => selectedContrato && handleSalvarPDF(selectedContrato.id)}
+            disabled={!selectedContrato || salvarPDFMutation.isPending || !!selectedContrato.caminhoDocumentoPDF}
+            startIcon={selectedContrato?.caminhoDocumentoPDF ? <CheckCircleIcon /> : <SaveIcon />}
+            variant="contained"
+            color={selectedContrato?.caminhoDocumentoPDF ? "success" : "primary"}
+          >
+            {salvarPDFMutation.isPending 
+              ? 'Salvando...' 
+              : selectedContrato?.caminhoDocumentoPDF 
+                ? 'PDF Salvo' 
+                : 'Salvar PDF'}
+          </Button>
+          
           <Button onClick={() => setViewDialogOpen(false)}>Fechar</Button>
         </DialogActions>
       </Dialog>
+      
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
