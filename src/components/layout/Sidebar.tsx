@@ -17,7 +17,7 @@ import {
   Dashboard as DashboardIcon,
   Home as HomeIcon,
   People as PeopleIcon,
-//   Description as DescriptionIcon,
+  Description as DescriptionIcon,
   Person as PersonIcon,
   Settings as SettingsIcon,
   ExpandLess,
@@ -67,14 +67,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       icon: <PeopleIcon />,
       path: '/locatarios',
     },
-    // {
-    //   text: 'Contratos',
-    //   icon: <DescriptionIcon />,
-    //   children: [
-    //     { text: 'Listar Contratos', path: '/contratos' },
-    //     { text: 'Novo Contrato', path: '/contratos/novo' },
-    //   ],
-    // },
+    {
+      text: 'Contratos',
+      icon: <DescriptionIcon />,
+      path: '/contratos',
+    },
     {
       text: 'Configurações',
       icon: <SettingsIcon />,

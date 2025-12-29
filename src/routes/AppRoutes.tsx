@@ -14,6 +14,9 @@ const LocatariosPage = lazy(() => import('@/pages/LocatariosPage'));
 const LocatarioCreatePage = lazy(() => import('@/pages/LocatarioCreatePage'));
 const LocatarioEditPage = lazy(() => import('@/pages/LocatarioEditPage'));
 const ImovelFormPage = lazy(() => import('@/pages/ImovelFormPage'));
+const ContratosPage = lazy(() => import('@/pages/ContratosPage'));
+const ContratoCreatePage = lazy(() => import('@/pages/ContratoCreatePage'));
+const ContratoEditPage = lazy(() => import('@/pages/ContratoEditPage'));
 
 function AppRoutes() {
   return (
@@ -33,8 +36,11 @@ function AppRoutes() {
           <Route path="/imoveis/novo" element={<ImovelFormPage />} />
           <Route path="/imoveis/editar/:id" element={<ImovelFormPage />} />
           <Route path="/locatarios" element={<LocatariosPage />} />
-        <Route path="/locatarios/novo" element={<LocatarioCreatePage />} />
-        <Route path="/locatarios/editar/:id" element={<LocatarioEditPage />} />
+          <Route path="/locatarios/novo" element={<LocatarioCreatePage />} />
+          <Route path="/locatarios/editar/:id" element={<LocatarioEditPage />} />
+          <Route path="/contratos" element={<ContratosPage />} />
+          <Route path="/contratos/novo" element={<ContratoCreatePage />} />
+          <Route path="/contratos/editar/:id" element={<ContratoEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
