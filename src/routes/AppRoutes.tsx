@@ -17,6 +17,10 @@ const ImovelFormPage = lazy(() => import('@/pages/ImovelFormPage'));
 const ContratosPage = lazy(() => import('@/pages/ContratosPage'));
 const ContratoCreatePage = lazy(() => import('@/pages/ContratoCreatePage'));
 const ContratoEditPage = lazy(() => import('@/pages/ContratoEditPage'));
+const RecebimentosPage = lazy(() => import('@/pages/RecebimentosPage'));
+const RecebimentoCreatePage = lazy(() => import('@/pages/RecebimentoCreatePage'));
+const RecebimentoEditPage = lazy(() => import('@/pages/RecebimentoEditPage'));
+const RecebimentoGerarPage = lazy(() => import('@/pages/RecebimentoGerarPage'));
 
 function AppRoutes() {
   return (
@@ -41,6 +45,10 @@ function AppRoutes() {
           <Route path="/contratos" element={<ContratosPage />} />
           <Route path="/contratos/novo" element={<ContratoCreatePage />} />
           <Route path="/contratos/editar/:id" element={<ContratoEditPage />} />
+          <Route path="/recebimentos" element={<RecebimentosPage />} />
+          <Route path="/recebimentos/novo" element={<RecebimentoCreatePage />} />
+          <Route path="/recebimentos/editar/:id" element={<RecebimentoEditPage />} />
+          <Route path="/recebimentos/gerar" element={<RecebimentoGerarPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
