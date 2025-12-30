@@ -21,6 +21,9 @@ const RecebimentosPage = lazy(() => import('@/pages/RecebimentosPage'));
 const RecebimentoCreatePage = lazy(() => import('@/pages/RecebimentoCreatePage'));
 const RecebimentoEditPage = lazy(() => import('@/pages/RecebimentoEditPage'));
 const RecebimentoGerarPage = lazy(() => import('@/pages/RecebimentoGerarPage'));
+const MovimentacoesPage = lazy(() => import('@/pages/MovimentacoesPage'));
+const MovimentacaoCreatePage = lazy(() => import('@/pages/MovimentacoesCreatePage'));
+const MovimentacaoEditPage = lazy(() => import('@/pages/MovimentacoesEditPage'));
 
 function AppRoutes() {
   return (
@@ -49,6 +52,9 @@ function AppRoutes() {
           <Route path="/recebimentos/novo" element={<RecebimentoCreatePage />} />
           <Route path="/recebimentos/editar/:id" element={<RecebimentoEditPage />} />
           <Route path="/recebimentos/gerar" element={<RecebimentoGerarPage />} />
+          <Route path="/movimentacoes" element={<MovimentacoesPage />} />
+          <Route path="/movimentacoes/novo" element={<MovimentacaoCreatePage />} />
+          <Route path="/movimentacoes/editar/:id" element={<MovimentacaoEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 

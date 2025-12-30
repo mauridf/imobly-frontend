@@ -21,6 +21,7 @@ import {
   Person as PersonIcon,
   Settings as SettingsIcon,
   AttachMoney as AttachMoneyIcon,
+  Money as MoneyIcon,
   ExpandLess,
   ExpandMore,
 } from '@mui/icons-material';
@@ -74,9 +75,14 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       path: '/contratos',
     },
     {
-      text: 'Recebimentos', // NOVO ITEM
-      icon: <AttachMoneyIcon />, // Adicione este import
+      text: 'Recebimentos',
+      icon: <AttachMoneyIcon />,
       path: '/recebimentos',
+    },
+    {
+      text: 'Movimentações Financeiras',
+      icon: <MoneyIcon />,
+      path: '/movimentacoes',
     },
     {
       text: 'Configurações',
