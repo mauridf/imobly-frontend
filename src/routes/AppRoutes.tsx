@@ -27,6 +27,9 @@ const MovimentacaoEditPage = lazy(() => import('@/pages/MovimentacoesEditPage'))
 const ReajustesPage = lazy(() => import('@/pages/ReajustesPage'));
 const ReajusteCreatePage = lazy(() => import('@/pages/ReajustesCreatePage'));
 const ReajusteEditPage = lazy(() => import('@/pages/ReajustesEditPage'));
+const ManutencoesPage = lazy(() => import('@/pages/ManutencoesPage'));
+const ManutencoesEditPage = lazy(() => import('@/pages/ManutencoesEditPage'));
+const ManutencoesCreatePage = lazy(() => import('@/pages/ManutencoesCreatePage'));
 
 function AppRoutes() {
   return (
@@ -61,6 +64,9 @@ function AppRoutes() {
           <Route path="/reajustes" element={<ReajustesPage />} />
           <Route path="/reajustes/novo" element={<ReajusteCreatePage />} />
           <Route path="/reajustes/editar/:id" element={<ReajusteEditPage />} />
+          <Route path="/manutencoes" element={<ManutencoesPage />} />
+          <Route path="/manutencoes/novo" element={<ManutencoesCreatePage />} />
+          <Route path="/manutencoes/editar/:id" element={<ManutencoesEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 

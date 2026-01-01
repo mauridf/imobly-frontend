@@ -19,7 +19,7 @@ import {
   People as PeopleIcon,
   Description as DescriptionIcon,
   Person as PersonIcon,
-  Settings as SettingsIcon,
+  BuildCircle as BuildIcon,
   AttachMoney as AttachMoneyIcon,
   Money as MoneyIcon,
   TrendingUp as TrendingUpIcon,
@@ -91,9 +91,9 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       path: '/reajustes',
     },
     {
-      text: 'Configurações',
-      icon: <SettingsIcon />,
-      path: '/configuracoes',
+      text: 'Manutenções',
+      icon: <BuildIcon />,
+      path: '/manutencoes',
     },
   ];
 
