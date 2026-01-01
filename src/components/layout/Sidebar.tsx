@@ -22,6 +22,7 @@ import {
   Settings as SettingsIcon,
   AttachMoney as AttachMoneyIcon,
   Money as MoneyIcon,
+  TrendingUp as TrendingUpIcon,
   ExpandLess,
   ExpandMore,
 } from '@mui/icons-material';
@@ -83,6 +84,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       text: 'Movimentações Financeiras',
       icon: <MoneyIcon />,
       path: '/movimentacoes',
+    },
+    {
+      icon: <TrendingUpIcon />,
+      text: 'Histórico de Reajustes',
+      path: '/reajustes',
     },
     {
       text: 'Configurações',

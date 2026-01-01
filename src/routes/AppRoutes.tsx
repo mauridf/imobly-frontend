@@ -24,6 +24,9 @@ const RecebimentoGerarPage = lazy(() => import('@/pages/RecebimentoGerarPage'));
 const MovimentacoesPage = lazy(() => import('@/pages/MovimentacoesPage'));
 const MovimentacaoCreatePage = lazy(() => import('@/pages/MovimentacoesCreatePage'));
 const MovimentacaoEditPage = lazy(() => import('@/pages/MovimentacoesEditPage'));
+const ReajustesPage = lazy(() => import('@/pages/ReajustesPage'));
+const ReajusteCreatePage = lazy(() => import('@/pages/ReajustesCreatePage'));
+const ReajusteEditPage = lazy(() => import('@/pages/ReajustesEditPage'));
 
 function AppRoutes() {
   return (
@@ -55,6 +58,9 @@ function AppRoutes() {
           <Route path="/movimentacoes" element={<MovimentacoesPage />} />
           <Route path="/movimentacoes/novo" element={<MovimentacaoCreatePage />} />
           <Route path="/movimentacoes/editar/:id" element={<MovimentacaoEditPage />} />
+          <Route path="/reajustes" element={<ReajustesPage />} />
+          <Route path="/reajustes/novo" element={<ReajusteCreatePage />} />
+          <Route path="/reajustes/editar/:id" element={<ReajusteEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
