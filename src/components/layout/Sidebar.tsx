@@ -23,6 +23,7 @@ import {
   AttachMoney as AttachMoneyIcon,
   Money as MoneyIcon,
   TrendingUp as TrendingUpIcon,
+  Shield as InsuranceIcon,
   ExpandLess,
   ExpandMore,
 } from '@mui/icons-material';
@@ -95,6 +96,11 @@ function Sidebar({ mobileOpen, onDrawerToggle, drawerWidth }: SidebarProps) {
       icon: <BuildIcon />,
       path: '/manutencoes',
     },
+    {
+      text: 'Seguros',
+      icon: <InsuranceIcon />,
+      path: '/seguros',
+    }
   ];
 
   const handleToggleItem = (text: string) => {

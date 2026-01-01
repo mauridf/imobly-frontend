@@ -30,6 +30,9 @@ const ReajusteEditPage = lazy(() => import('@/pages/ReajustesEditPage'));
 const ManutencoesPage = lazy(() => import('@/pages/ManutencoesPage'));
 const ManutencoesEditPage = lazy(() => import('@/pages/ManutencoesEditPage'));
 const ManutencoesCreatePage = lazy(() => import('@/pages/ManutencoesCreatePage'));
+const SegurosPage = lazy(() => import('@/pages/SegurosPage'));
+const SeguroCreatePage = lazy(() => import('@/pages/SegurosCreatePage'));
+const SeguroEditPage = lazy(() => import('@/pages/SegurosEditPage'));
 
 function AppRoutes() {
   return (
@@ -67,6 +70,9 @@ function AppRoutes() {
           <Route path="/manutencoes" element={<ManutencoesPage />} />
           <Route path="/manutencoes/novo" element={<ManutencoesCreatePage />} />
           <Route path="/manutencoes/editar/:id" element={<ManutencoesEditPage />} />
+          <Route path="/seguros" element={<SegurosPage />} />
+          <Route path="/seguros/novo" element={<SeguroCreatePage />} />
+          <Route path="/seguros/editar/:id" element={<SeguroEditPage />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Route>
 
