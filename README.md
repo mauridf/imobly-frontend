@@ -4,8 +4,6 @@
 ## 🎯 Visão Geral
 O **Imobly Frontend** é uma aplicação web moderna desenvolvida em **React**, oferecendo uma interface intuitiva, responsiva e robusta para o gerenciamento completo de locação de imóveis. A aplicação consome a **Imobly API (.NET)** e entrega uma experiência profissional para gestão de propriedades residenciais e comerciais.
 
-![Imobly Dashboard Preview](https://via.placeholder.com/800x400.png?text=Imobly+Dashboard+Preview)
-
 ---
 
 ## ✨ Funcionalidades Principais
@@ -19,7 +17,6 @@ O **Imobly Frontend** é uma aplicação web moderna desenvolvida em **React**, 
 ### 🔐 Sistema de Autenticação
 - Login com JWT
 - Registro de usuários
-- Recuperação de senha
 - Logout automático por inatividade
 - Proteção de rotas privadas
 
@@ -141,20 +138,9 @@ imobly-frontend/
 
 ### Instalação
 ```bash
-git clone https://github.com/seu-usuario/imobly-frontend.git
+git clone https://github.com/mauridf/imobly-frontend
 cd imobly-frontend
 npm install
-```
-
-### Variáveis de Ambiente
-```bash
-cp .env.example .env.local
-```
-
-```env
-VITE_API_URL=http://localhost:5000/api
-VITE_WS_URL=ws://localhost:5000/ws
-VITE_APP_NAME=Imobly
 ```
 
 ### Executar
@@ -162,47 +148,6 @@ VITE_APP_NAME=Imobly
 npm run dev
 ```
 Acesse: **http://localhost:5173**
-
----
-
-## 🧪 Testes
-```bash
-npm run test
-npm run test:coverage
-```
-
----
-
-## 🚢 Deploy
-
-### Vercel (Recomendado)
-- Conecte o repositório
-- Configure variáveis de ambiente
-- Deploy automático
-
-### Docker
-```dockerfile
-FROM node:18-alpine as build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
----
-
-## 📈 Performance
-- Code Splitting
-- Lazy Loading
-- Tree Shaking
-- Lighthouse Score > 90
-- Bundle < 500kb gzipped
 
 ---
 
@@ -221,8 +166,7 @@ Licença MIT.
 
 ## 📞 Suporte
 - GitHub Issues
-- Wiki do projeto
-- suporte@imobly.com
+- mauricio.carvalho.developer@gmail.com
 
 ---
 
