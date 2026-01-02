@@ -336,11 +336,11 @@ function SegurosPage() {
                       <Box>
                         <Typography variant="body2">
                           <CalendarIcon sx={{ fontSize: 14, mr: 0.5, verticalAlign: 'middle' }} />
-                          Início: formatDate(String(seguro.dataInicio))
+                          Início: {formatDate(String(seguro.dataInicio))}
                         </Typography>
                         <Typography variant="body2">
                           <CalendarIcon sx={{ fontSize: 14, mr: 0.5, verticalAlign: 'middle' }} />
-                          Fim: formatDate(String(seguro.dataFim))
+                          Fim: {formatDate(String(seguro.dataFim))}
                         </Typography>
                       </Box>
                     </TableCell>
