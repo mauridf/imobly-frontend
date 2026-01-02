@@ -1,73 +1,229 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Imobly Frontend - Sistema de Gestão de Locação de Imóveis
 
-Currently, two official plugins are available:
+## 🎯 Visão Geral
+O **Imobly Frontend** é uma aplicação web moderna desenvolvida em **React**, oferecendo uma interface intuitiva, responsiva e robusta para o gerenciamento completo de locação de imóveis. A aplicação consome a **Imobly API (.NET)** e entrega uma experiência profissional para gestão de propriedades residenciais e comerciais.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Imobly Dashboard Preview](https://via.placeholder.com/800x400.png?text=Imobly+Dashboard+Preview)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Funcionalidades Principais
 
-## Expanding the ESLint configuration
+### 📱 Interface Responsiva
+- Design responsivo (Mobile, Tablet, Desktop)
+- Tema claro e escuro
+- Sidebar colapsável
+- Loaders e skeletons para melhor UX
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔐 Sistema de Autenticação
+- Login com JWT
+- Registro de usuários
+- Recuperação de senha
+- Logout automático por inatividade
+- Proteção de rotas privadas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🏠 Módulo de Imóveis
+- Listagem com cards interativos
+- Cadastro de imóveis residenciais e comerciais
+- Upload múltiplo de imagens
+- Filtros avançados
+- Ativação/desativação de imóveis
+- Visualização em galeria ou lista
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 👥 Gestão de Locatários
+- Lista com status visual
+- Validação de CPF em tempo real
+- Histórico de contratos
+- Busca avançada
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📑 Contratos e Documentos
+- Wizard de criação de contratos
+- Associação imóvel/locatário
+- Geração automática de recebimentos
+- Download de contratos em PDF
+- Histórico e reajustes
+
+### 💰 Controle Financeiro
+- Dashboard financeiro
+- Status visual de recebimentos
+- Gráficos de receitas e despesas
+- Relatórios por período
+
+### 🛠️ Manutenções e Seguros
+- Calendário de manutenções
+- Controle de status
+- Gestão de seguros
+- Alertas de vencimento
+
+### 🔔 Notificações
+- Notificações em tempo real (WebSocket)
+- Alertas de vencimento
+- Badge de notificações
+
+### 📊 Dashboard Inteligente
+- KPIs financeiros
+- Gráficos interativos
+- Contratos próximos do vencimento
+- Atualização automática
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### Core
+- React 18
+- TypeScript
+- Vite
+- React Router DOM v6
+
+### UI/UX
+- Material UI (MUI) v5
+- Emotion
+- React Hook Form
+- Yup
+- React Query (TanStack)
+- Zustand
+
+### Visualização
+- Chart.js + React-Chartjs-2
+- React Big Calendar
+- React Data Table
+
+### Utilitários
+- Axios
+- Date-fns
+- React Hot Toast
+- React Dropzone
+- React PDF
+
+### Ferramentas
+- ESLint
+- Prettier
+- Husky
+- Jest
+- React Testing Library
+
+---
+
+## 📁 Estrutura do Projeto
+```
+imobly-frontend/
+├── public/
+├── src/
+│   ├── api/
+│   ├── assets/
+│   ├── components/
+│   ├── contexts/
+│   ├── hooks/
+│   ├── pages/
+│   ├── routes/
+│   ├── services/
+│   ├── stores/
+│   ├── types/
+│   ├── utils/
+│   ├── App.tsx
+│   └── main.tsx
+├── .env.example
+├── vite.config.ts
+├── package.json
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Instalação e Execução
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Pré-requisitos
+- Node.js 18+
+- Backend Imobly API
+- Git
+
+### Instalação
+```bash
+git clone https://github.com/seu-usuario/imobly-frontend.git
+cd imobly-frontend
+npm install
 ```
+
+### Variáveis de Ambiente
+```bash
+cp .env.example .env.local
+```
+
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_WS_URL=ws://localhost:5000/ws
+VITE_APP_NAME=Imobly
+```
+
+### Executar
+```bash
+npm run dev
+```
+Acesse: **http://localhost:5173**
+
+---
+
+## 🧪 Testes
+```bash
+npm run test
+npm run test:coverage
+```
+
+---
+
+## 🚢 Deploy
+
+### Vercel (Recomendado)
+- Conecte o repositório
+- Configure variáveis de ambiente
+- Deploy automático
+
+### Docker
+```dockerfile
+FROM node:18-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+---
+
+## 📈 Performance
+- Code Splitting
+- Lazy Loading
+- Tree Shaking
+- Lighthouse Score > 90
+- Bundle < 500kb gzipped
+
+---
+
+## 📄 Licença
+Licença MIT.
+
+---
+
+## 🤝 Contribuição
+- Fork
+- Branch feature/*
+- Commits convencionais
+- Pull Request
+
+---
+
+## 📞 Suporte
+- GitHub Issues
+- Wiki do projeto
+- suporte@imobly.com
+
+---
+
+**Imobly Frontend** — gestão imobiliária moderna, rápida e profissional.
